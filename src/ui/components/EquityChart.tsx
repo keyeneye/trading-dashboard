@@ -108,19 +108,29 @@ export default function EquityChart() {
   let canvasRef!: HTMLCanvasElement;
   let resizeObserver: ResizeObserver | undefined;
 
-  onMount(() => {
-    resizeObserver = new ResizeObserver(() => {
+  const handleRef = (el: HTMLCanvasElement) => {
+    canvasRef = el;
+    if (el) {
+      // Canvas is now in DOM, set up observer
+      resizeObserver = new ResizeObserver(() => {
+        const data = snapshots();
+        if (data && data.length >= 2) drawChart(canvasRef, data);
+      });
+      resizeObserver.observe(el);
+      
+      // Initial draw
       const data = snapshots();
-      if (data && data.length >= 2) drawChart(canvasRef, data);
-    });
-    resizeObserver.observe(canvasRef);
-  });
+      if (data && data.length >= 2) drawChart(el, data);
+    }
+  };
 
   onCleanup(() => resizeObserver?.disconnect());
 
   createEffect(() => {
     const data = snapshots();
-    if (data && data.length >= 2) drawChart(canvasRef, data);
+    if (canvasRef && data && data.length >= 2) {
+      drawChart(canvasRef, data);
+    }
   });
 
   return (
@@ -131,7 +141,7 @@ export default function EquityChart() {
         fallback={<p style="color: var(--text-dim)">Waiting for portfolio data (need at least 2 snapshots)...</p>}
       >
         <canvas
-          ref={canvasRef}
+          ref={handleRef}
           style="width: 100%; height: 250px; border-radius: 0.5rem;"
         />
       </Show>
