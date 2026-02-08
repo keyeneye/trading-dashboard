@@ -42,7 +42,7 @@ function drawFibonacciChart(
 
   const w = rect.width;
   const h = rect.height;
-  const pad = { top: 28, right: 90, bottom: 48, left: 80 };
+  const pad = { top: 45, right: 90, bottom: 48, left: 80 };
   const plotW = w - pad.left - pad.right;
   const plotH = h - pad.top - pad.bottom;
 
@@ -403,28 +403,29 @@ function drawFibonacciChart(
   );
 }
 
-export default function FibonacciChart() {
-  let canvasRef!: HTMLCanvasElement;
-  let containerRef!: HTMLDivElement;
+export default function PerformanceChart() {
+  let canvasRef: HTMLCanvasElement | undefined;
+  let containerRef: HTMLDivElement | undefined;
   let resizeObserver: ResizeObserver | undefined;
   const [mouseX, setMouseX] = createSignal<number | null>(null);
 
   function redraw() {
     const data = snapshots();
-    if (data && data.length >= 2) {
+    if (data && data.length >= 2 && canvasRef) {
       drawFibonacciChart(canvasRef, data, tradesToday(), signalsToday(), mouseX());
     }
   }
 
   onMount(() => {
-    resizeObserver = new ResizeObserver(() => redraw());
-    resizeObserver.observe(containerRef);
+    if (containerRef) {
+      resizeObserver = new ResizeObserver(() => redraw());
+      resizeObserver.observe(containerRef);
+    }
   });
 
   onCleanup(() => resizeObserver?.disconnect());
 
   createEffect(() => {
-    // Track all reactive deps
     snapshots();
     tradesToday();
     signalsToday();
@@ -433,6 +434,7 @@ export default function FibonacciChart() {
   });
 
   function handleMouseMove(e: MouseEvent) {
+    if (!canvasRef) return;
     const rect = canvasRef.getBoundingClientRect();
     setMouseX(e.clientX - rect.left);
   }
@@ -442,38 +444,77 @@ export default function FibonacciChart() {
   }
 
   return (
-    <div class="fib-chart-container" ref={containerRef}>
-      <div class="fib-chart-header">
-        <div class="fib-chart-title">
-          <span class="fib-icon">&#9672;</span>
-          Fibonacci Projection
-        </div>
-        <div class="fib-chart-legend">
-          <span class="fib-legend-item fib-legend-38">38.2%</span>
-          <span class="fib-legend-item fib-legend-50">50.0%</span>
-          <span class="fib-legend-item fib-legend-61">61.8%</span>
-          <span class="fib-legend-sep">|</span>
-          <span class="fib-legend-buy">&#9650; Buy</span>
-          <span class="fib-legend-sell">&#9660; Sell</span>
+    <div class="card fib-chart-container performance-card" ref={containerRef!}>
+      <div class="performance-header">
+        <h2>Performance Overview</h2>
+        <div class="performance-current">
+          <span class="current-label">Current</span>
+          <span class="current-value">$100,125</span>
         </div>
       </div>
-      <Show
-        when={snapshots() && snapshots()!.length >= 2}
-        fallback={
-          <div class="fib-chart-empty">
-            <div class="fib-chart-empty-icon">&#8967;</div>
-            <p>Awaiting portfolio data...</p>
-            <span>Minimum 2 snapshots required</span>
+
+      <div class="performance-content">
+        <div class="performance-legend">
+          <div class="legend-section">
+            <span class="legend-title">Fibonacci Levels</span>
+            <div class="legend-items">
+              <span class="fib-badge fib-38">38.2%</span>
+              <span class="fib-badge fib-50">50.0%</span>
+              <span class="fib-badge fib-61">61.8%</span>
+            </div>
           </div>
-        }
-      >
-        <canvas
-          ref={canvasRef}
-          style="width: 100%; height: 380px; cursor: crosshair; border-radius: 0 0 0.5rem 0.5rem;"
-          onMouseMove={handleMouseMove}
-          onMouseLeave={handleMouseLeave}
-        />
-      </Show>
+          <div class="legend-section">
+            <span class="legend-title">Trade Signals</span>
+            <div class="legend-items">
+              <span class="signal-badge signal-buy">▲ Buy</span>
+              <span class="signal-badge signal-sell">▼ Sell</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="chart-wrapper" style="min-height: 320px;">
+          <Show
+            when={snapshots() && snapshots()!.length >= 2}
+            fallback={
+              <div class="fib-chart-empty">
+                <div class="fib-chart-empty-icon">&#8967;</div>
+                <p>Awaiting portfolio data...</p>
+                <span>Minimum 2 snapshots required</span>
+              </div>
+            }
+          >
+            <canvas
+              ref={canvasRef}
+              style="width: 100%; height: 320px; cursor: crosshair;"
+              onMouseMove={handleMouseMove}
+              onMouseLeave={handleMouseLeave}
+            />
+          </Show>
+        </div>
+      </div>
+
+      <div class="performance-footer">
+        <div class="footer-stat">
+          <span class="footer-label">Period</span>
+          <span class="footer-value">30 Days</span>
+        </div>
+        <div class="footer-divider" />
+        <div class="footer-stat">
+          <span class="footer-label">Total Return</span>
+          <span class="footer-value positive">+38.2%</span>
+        </div>
+        <div class="footer-divider" />
+        <div class="footer-stat">
+          <span class="footer-label">Trades</span>
+          <span class="footer-value">24</span>
+        </div>
+        <div class="footer-divider" />
+        <div class="footer-stat">
+          <span class="footer-label">Win Rate</span>
+          <span class="footer-value">67%</span>
+        </div>
+      </div>
     </div>
   );
 }
+
