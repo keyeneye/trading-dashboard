@@ -38,40 +38,47 @@ export default function TradesTable() {
   });
 
   return (
-    <div class="card">
-      <h2>Recent Trades</h2>
+    <div class="card trades-card">
+      <div class="card-header">
+        <h2>Recent Trades</h2>
+        <Show when={trades()}>
+          {(list) => <span class="positions-count">{list().length} Trades</span>}
+        </Show>
+      </div>
       <Show when={trades()} fallback={<p>Loading...</p>}>
         {(list) => (
-          <table>
-            <thead>
-              <tr>
-                <th>Time</th>
-                <th>Symbol</th>
-                <th>Side</th>
-                <th>Qty</th>
-                <th>Price</th>
-                <th>Strategy</th>
-              </tr>
-            </thead>
-            <tbody>
-              <For each={list()}>
-                {(t: Trade) => (
-                  <tr>
-                    <td>{new Date(t.timestamp).toLocaleString()}</td>
-                    <td class="symbol">{t.symbol}</td>
-                    <td class={getSideClass(t.side)}>
-                      <span class={`badge ${getSideClass(t.side)}`}>
-                        {getSideLabel(t.side)}
-                      </span>
-                    </td>
-                    <td>{t.quantity}</td>
-                    <td>${t.price.toFixed(2)}</td>
-                    <td>{t.strategy}</td>
-                  </tr>
-                )}
-              </For>
-            </tbody>
-          </table>
+          <div class="table-wrapper">
+            <table>
+              <thead>
+                <tr>
+                  <th>Time</th>
+                  <th>Symbol</th>
+                  <th>Side</th>
+                  <th>Qty</th>
+                  <th>Price</th>
+                  <th>Strategy</th>
+                </tr>
+              </thead>
+              <tbody>
+                <For each={list()}>
+                  {(t: Trade) => (
+                    <tr>
+                      <td class="time-cell">{new Date(t.timestamp).toLocaleString()}</td>
+                      <td class="symbol">{t.symbol}</td>
+                      <td class={getSideClass(t.side)}>
+                        <span class={`badge ${getSideClass(t.side)}`}>
+                          {getSideLabel(t.side)}
+                        </span>
+                      </td>
+                      <td class="qty">{t.quantity}</td>
+                      <td class="price">${t.price.toFixed(2)}</td>
+                      <td>{t.strategy}</td>
+                    </tr>
+                  )}
+                </For>
+              </tbody>
+            </table>
+          </div>
         )}
       </Show>
     </div>

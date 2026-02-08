@@ -62,7 +62,7 @@ export default function PositionsTable() {
                   <span class="footer-label">Total Value</span>
                   <span class="footer-value">${totalValue().toLocaleString(undefined, { maximumFractionDigits: 2 })}</span>
                 </div>
-                <div class={`footer-item ${totalPnl() >= 0 ? "positive" : "negative"}`}>
+                <div class={`footer-item footer-item-position ${totalPnl() >= 0 ? "positive" : "negative"}`}>
                   <span class="footer-label">Total P&L</span>
                   <span class="footer-value">{totalPnl() >= 0 ? "+" : ""}${totalPnl().toLocaleString(undefined, { maximumFractionDigits: 2 })}</span>
                 </div>
