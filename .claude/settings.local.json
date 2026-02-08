@@ -9,7 +9,12 @@
       "mcp__playwright__browser_evaluate",
       "mcp__playwright__browser_navigate",
       "mcp__playwright__browser_close",
-      "Bash(pkill:*)"
+      "Bash(pkill:*)",
+      "mcp__playwright__browser_network_requests",
+      "Bash(docker ps:*)",
+      "Bash(docker exec:*)",
+      "Bash(docker compose up:*)",
+      "Bash(docker restart:*)"
     ]
   }
 }
