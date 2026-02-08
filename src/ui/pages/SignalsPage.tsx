@@ -1,5 +1,9 @@
 import SignalsTable from "@ui/components/SignalsTable";
 
 export default function SignalsPage() {
-  return <SignalsTable />;
+  return (
+    <div class="dashboard">
+      <SignalsTable />
+    </div>
+  );
 }

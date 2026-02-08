@@ -1,0 +1,117 @@
+[     560ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:3000/api/positions:0
+[     561ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:3000/api/trades/today:0
+[     566ms] Error: API 500: /api/positions
+    at get (http://localhost:3000/src/infra/api/client.ts:4:22)
+[     566ms] Error: API 500: /api/trades/today
+    at get (http://localhost:3000/src/infra/api/client.ts:4:22)
+[     561ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:3000/api/signals/today:0
+[     562ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:3000/api/snapshots?limit=30:0
+[     569ms] Error: API 500: /api/snapshots?limit=30
+    at get (http://localhost:3000/src/infra/api/client.ts:4:22)
+[     563ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:3000/api/portfolio:0
+[     571ms] Error: API 500: /api/portfolio
+    at get (http://localhost:3000/src/infra/api/client.ts:4:22)
+[     563ms] [ERROR] WebSocket connection to 'ws://localhost:3000/ws' failed: Connection closed before receiving a handshake response @ http://localhost:3000/src/infra/ws/client.ts:15
+[     622ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://localhost:3000/favicon.ico:0
+[    3568ms] [ERROR] WebSocket connection to 'ws://localhost:3000/ws' failed: Connection closed before receiving a handshake response @ http://localhost:3000/src/infra/ws/client.ts:15
+[    6571ms] [ERROR] WebSocket connection to 'ws://localhost:3000/ws' failed: Connection closed before receiving a handshake response @ http://localhost:3000/src/infra/ws/client.ts:15
+[    9633ms] [ERROR] WebSocket connection to 'ws://localhost:3000/ws' failed: Connection closed before receiving a handshake response @ http://localhost:3000/src/infra/ws/client.ts:15
+[   12639ms] [ERROR] WebSocket connection to 'ws://localhost:3000/ws' failed: Connection closed before receiving a handshake response @ http://localhost:3000/src/infra/ws/client.ts:15
+[   15642ms] [ERROR] WebSocket connection to 'ws://localhost:3000/ws' failed: Connection closed before receiving a handshake response @ http://localhost:3000/src/infra/ws/client.ts:15
+[   18650ms] [ERROR] WebSocket connection to 'ws://localhost:3000/ws' failed: Connection closed before receiving a handshake response @ http://localhost:3000/src/infra/ws/client.ts:15
+[   21704ms] [ERROR] WebSocket connection to 'ws://localhost:3000/ws' failed: Connection closed before receiving a handshake response @ http://localhost:3000/src/infra/ws/client.ts:15
+[   22233ms] [ERROR] WebSocket connection to 'ws://localhost:3000/ws' failed: Connection closed before receiving a handshake response @ http://localhost:3000/src/infra/ws/client.ts:15
+[   25282ms] [ERROR] WebSocket connection to 'ws://localhost:3000/ws' failed: Connection closed before receiving a handshake response @ http://localhost:3000/src/infra/ws/client.ts:15
+[   28291ms] [ERROR] WebSocket connection to 'ws://localhost:3000/ws' failed: Connection closed before receiving a handshake response @ http://localhost:3000/src/infra/ws/client.ts:15
+[   31295ms] [ERROR] WebSocket connection to 'ws://localhost:3000/ws' failed: Connection closed before receiving a handshake response @ http://localhost:3000/src/infra/ws/client.ts:15
+[   34309ms] [ERROR] WebSocket connection to 'ws://localhost:3000/ws' failed: Connection closed before receiving a handshake response @ http://localhost:3000/src/infra/ws/client.ts:15
+[   36476ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:3000/api/trades?limit=50:0
+[   36480ms] Error: API 500: /api/trades?limit=50
+    at get (http://localhost:3000/src/infra/api/client.ts:4:22)
+[   37324ms] [ERROR] WebSocket connection to 'ws://localhost:3000/ws' failed: Connection closed before receiving a handshake response @ http://localhost:3000/src/infra/ws/client.ts:15
+[   40344ms] [ERROR] WebSocket connection to 'ws://localhost:3000/ws' failed: Connection closed before receiving a handshake response @ http://localhost:3000/src/infra/ws/client.ts:15
+[   43437ms] [ERROR] WebSocket connection to 'ws://localhost:3000/ws' failed: Connection closed before receiving a handshake response @ http://localhost:3000/src/infra/ws/client.ts:15
+[   46483ms] [ERROR] WebSocket connection to 'ws://localhost:3000/ws' failed: Connection closed before receiving a handshake response @ http://localhost:3000/src/infra/ws/client.ts:15
+[   49529ms] [ERROR] WebSocket connection to 'ws://localhost:3000/ws' failed: Connection closed before receiving a handshake response @ http://localhost:3000/src/infra/ws/client.ts:15
+[   50093ms] [ERROR] WebSocket connection to 'ws://localhost:3000/ws' failed: Connection closed before receiving a handshake response @ http://localhost:3000/src/infra/ws/client.ts:15
+[   50298ms] Error: API 500: /api/portfolio
+    at get (http://localhost:3000/src/infra/api/client.ts:4:22)
+[   53127ms] [ERROR] WebSocket connection to 'ws://localhost:3000/ws' failed: Connection closed before receiving a handshake response @ http://localhost:3000/src/infra/ws/client.ts:15
+[   56266ms] [ERROR] WebSocket connection to 'ws://localhost:3000/ws' failed: Connection closed before receiving a handshake response @ http://localhost:3000/src/infra/ws/client.ts:15
+[   59432ms] [ERROR] WebSocket connection to 'ws://localhost:3000/ws' failed: Connection closed before receiving a handshake response @ http://localhost:3000/src/infra/ws/client.ts:15
+[   62621ms] [ERROR] WebSocket connection to 'ws://localhost:3000/ws' failed: Connection closed before receiving a handshake response @ http://localhost:3000/src/infra/ws/client.ts:15
+[   65779ms] [ERROR] WebSocket connection to 'ws://localhost:3000/ws' failed: Connection closed before receiving a handshake response @ http://localhost:3000/src/infra/ws/client.ts:15
+[   69216ms] [ERROR] WebSocket connection to 'ws://localhost:3000/ws' failed: Connection closed before receiving a handshake response @ http://localhost:3000/src/infra/ws/client.ts:15
+[   72371ms] [ERROR] WebSocket connection to 'ws://localhost:3000/ws' failed: Connection closed before receiving a handshake response @ http://localhost:3000/src/infra/ws/client.ts:15
+[   75737ms] [ERROR] WebSocket connection to 'ws://localhost:3000/ws' failed: Connection closed before receiving a handshake response @ http://localhost:3000/src/infra/ws/client.ts:15
+[   79806ms] [ERROR] WebSocket connection to 'ws://localhost:3000/ws' failed: Connection closed before receiving a handshake response @ http://localhost:3000/src/infra/ws/client.ts:15
+[   81338ms] [ERROR] WebSocket connection to 'ws://localhost:3000/ws' failed: Connection closed before receiving a handshake response @ http://localhost:3000/src/infra/ws/client.ts:15
+[   85860ms] [ERROR] WebSocket connection to 'ws://localhost:3000/ws' failed: Connection closed before receiving a handshake response @ http://localhost:3000/src/infra/ws/client.ts:15
+[   93208ms] [ERROR] WebSocket connection to 'ws://localhost:3000/ws' failed: Connection closed before receiving a handshake response @ http://localhost:3000/src/infra/ws/client.ts:15
+[  100592ms] [ERROR] WebSocket connection to 'ws://localhost:3000/ws' failed: Connection closed before receiving a handshake response @ http://localhost:3000/src/infra/ws/client.ts:15
+[  108284ms] [ERROR] WebSocket connection to 'ws://localhost:3000/ws' failed: Connection closed before receiving a handshake response @ http://localhost:3000/src/infra/ws/client.ts:15
+[  111725ms] [ERROR] WebSocket connection to 'ws://localhost:3000/ws' failed: Connection closed before receiving a handshake response @ http://localhost:3000/src/infra/ws/client.ts:15
+[  116007ms] [ERROR] WebSocket connection to 'ws://localhost:3000/ws' failed: Connection closed before receiving a handshake response @ http://localhost:3000/src/infra/ws/client.ts:15
+[  122519ms] [ERROR] WebSocket connection to 'ws://localhost:3000/ws' failed: Connection closed before receiving a handshake response @ http://localhost:3000/src/infra/ws/client.ts:15
+[  128911ms] [ERROR] WebSocket connection to 'ws://localhost:3000/ws' failed: Connection closed before receiving a handshake response @ http://localhost:3000/src/infra/ws/client.ts:15
+[  135826ms] [ERROR] WebSocket connection to 'ws://localhost:3000/ws' failed: Connection closed before receiving a handshake response @ http://localhost:3000/src/infra/ws/client.ts:15
+[  140577ms] [ERROR] WebSocket connection to 'ws://localhost:3000/ws' failed: Connection closed before receiving a handshake response @ http://localhost:3000/src/infra/ws/client.ts:15
+[  145074ms] [ERROR] WebSocket connection to 'ws://localhost:3000/ws' failed: Connection closed before receiving a handshake response @ http://localhost:3000/src/infra/ws/client.ts:15
+[  151232ms] [ERROR] WebSocket connection to 'ws://localhost:3000/ws' failed: Connection closed before receiving a handshake response @ http://localhost:3000/src/infra/ws/client.ts:15
+[  155783ms] [ERROR] WebSocket connection to 'ws://localhost:3000/ws' failed: Connection closed before receiving a handshake response @ http://localhost:3000/src/infra/ws/client.ts:15
+[  162693ms] [ERROR] WebSocket connection to 'ws://localhost:3000/ws' failed: Connection closed before receiving a handshake response @ http://localhost:3000/src/infra/ws/client.ts:15
+[  170479ms] [ERROR] WebSocket connection to 'ws://localhost:3000/ws' failed: Connection closed before receiving a handshake response @ http://localhost:3000/src/infra/ws/client.ts:15
+[  175408ms] [ERROR] WebSocket connection to 'ws://localhost:3000/ws' failed: Connection closed before receiving a handshake response @ http://localhost:3000/src/infra/ws/client.ts:15
+[  179725ms] [ERROR] WebSocket connection to 'ws://localhost:3000/ws' failed: Connection closed before receiving a handshake response @ http://localhost:3000/src/infra/ws/client.ts:15
+[  185831ms] [ERROR] WebSocket connection to 'ws://localhost:3000/ws' failed: Connection closed before receiving a handshake response @ http://localhost:3000/src/infra/ws/client.ts:15
+[  192996ms] [ERROR] WebSocket connection to 'ws://localhost:3000/ws' failed: Connection closed before receiving a handshake response @ http://localhost:3000/src/infra/ws/client.ts:15
+[  198153ms] [ERROR] WebSocket connection to 'ws://localhost:3000/ws' failed: Connection closed before receiving a handshake response @ http://localhost:3000/src/infra/ws/client.ts:15
+[  203039ms] [ERROR] WebSocket connection to 'ws://localhost:3000/ws' failed: Connection closed before receiving a handshake response @ http://localhost:3000/src/infra/ws/client.ts:15
+[  209765ms] [ERROR] WebSocket connection to 'ws://localhost:3000/ws' failed: Connection closed before receiving a handshake response @ http://localhost:3000/src/infra/ws/client.ts:15
+[  214734ms] [ERROR] WebSocket connection to 'ws://localhost:3000/ws' failed: Connection closed before receiving a handshake response @ http://localhost:3000/src/infra/ws/client.ts:15
+[  219639ms] [ERROR] WebSocket connection to 'ws://localhost:3000/ws' failed: Connection closed before receiving a handshake response @ http://localhost:3000/src/infra/ws/client.ts:15
+[  225876ms] [ERROR] WebSocket connection to 'ws://localhost:3000/ws' failed: Connection closed before receiving a handshake response @ http://localhost:3000/src/infra/ws/client.ts:15
+[  230226ms] [ERROR] WebSocket connection to 'ws://localhost:3000/ws' failed: Connection closed before receiving a handshake response @ http://localhost:3000/src/infra/ws/client.ts:15
+[  234544ms] [ERROR] WebSocket connection to 'ws://localhost:3000/ws' failed: Connection closed before receiving a handshake response @ http://localhost:3000/src/infra/ws/client.ts:15
+[  240152ms] [ERROR] WebSocket connection to 'ws://localhost:3000/ws' failed: Connection closed before receiving a handshake response @ http://localhost:3000/src/infra/ws/client.ts:15
+[  247627ms] [ERROR] WebSocket connection to 'ws://localhost:3000/ws' failed: Connection closed before receiving a handshake response @ http://localhost:3000/src/infra/ws/client.ts:15
+[  253272ms] [ERROR] WebSocket connection to 'ws://localhost:3000/ws' failed: Connection closed before receiving a handshake response @ http://localhost:3000/src/infra/ws/client.ts:15
+[  257918ms] [ERROR] WebSocket connection to 'ws://localhost:3000/ws' failed: Connection closed before receiving a handshake response @ http://localhost:3000/src/infra/ws/client.ts:15
+[  261273ms] [ERROR] WebSocket connection to 'ws://localhost:3000/ws' failed: Connection closed before receiving a handshake response @ http://localhost:3000/src/infra/ws/client.ts:15
+[  266275ms] [ERROR] WebSocket connection to 'ws://localhost:3000/ws' failed: Connection closed before receiving a handshake response @ http://localhost:3000/src/infra/ws/client.ts:15
+[  272348ms] [ERROR] WebSocket connection to 'ws://localhost:3000/ws' failed: Connection closed before receiving a handshake response @ http://localhost:3000/src/infra/ws/client.ts:15
+[  279844ms] [ERROR] WebSocket connection to 'ws://localhost:3000/ws' failed: Connection closed before receiving a handshake response @ http://localhost:3000/src/infra/ws/client.ts:15
+[  284316ms] [ERROR] WebSocket connection to 'ws://localhost:3000/ws' failed: Connection closed before receiving a handshake response @ http://localhost:3000/src/infra/ws/client.ts:15
+[  289155ms] [ERROR] WebSocket connection to 'ws://localhost:3000/ws' failed: Connection closed before receiving a handshake response @ http://localhost:3000/src/infra/ws/client.ts:15
+[  294702ms] [ERROR] WebSocket connection to 'ws://localhost:3000/ws' failed: Connection closed before receiving a handshake response @ http://localhost:3000/src/infra/ws/client.ts:15
+[  300472ms] [ERROR] WebSocket connection to 'ws://localhost:3000/ws' failed: Connection closed before receiving a handshake response @ http://localhost:3000/src/infra/ws/client.ts:15
+[  305714ms] [ERROR] WebSocket connection to 'ws://localhost:3000/ws' failed: Connection closed before receiving a handshake response @ http://localhost:3000/src/infra/ws/client.ts:15
+[  312612ms] [ERROR] WebSocket connection to 'ws://localhost:3000/ws' failed: Connection closed before receiving a handshake response @ http://localhost:3000/src/infra/ws/client.ts:15
+[  316809ms] [ERROR] WebSocket connection to 'ws://localhost:3000/ws' failed: Connection closed before receiving a handshake response @ http://localhost:3000/src/infra/ws/client.ts:15
+[  321971ms] [ERROR] WebSocket connection to 'ws://localhost:3000/ws' failed: Connection closed before receiving a handshake response @ http://localhost:3000/src/infra/ws/client.ts:15
+[  327963ms] [ERROR] WebSocket connection to 'ws://localhost:3000/ws' failed: Connection closed before receiving a handshake response @ http://localhost:3000/src/infra/ws/client.ts:15
+[  334051ms] [ERROR] WebSocket connection to 'ws://localhost:3000/ws' failed: Connection closed before receiving a handshake response @ http://localhost:3000/src/infra/ws/client.ts:15
+[  333405ms] [ERROR] WebSocket connection to 'ws://localhost:3000/ws' failed: Connection closed before receiving a handshake response @ http://localhost:3000/src/infra/ws/client.ts:15
+[  336407ms] [ERROR] WebSocket connection to 'ws://localhost:3000/ws' failed: Connection closed before receiving a handshake response @ http://localhost:3000/src/infra/ws/client.ts:15
+[  339410ms] [ERROR] WebSocket connection to 'ws://localhost:3000/ws' failed: Connection closed before receiving a handshake response @ http://localhost:3000/src/infra/ws/client.ts:15
+[  342412ms] [ERROR] WebSocket connection to 'ws://localhost:3000/ws' failed: Connection closed before receiving a handshake response @ http://localhost:3000/src/infra/ws/client.ts:15
+[  345415ms] [ERROR] WebSocket connection to 'ws://localhost:3000/ws' failed: Connection closed before receiving a handshake response @ http://localhost:3000/src/infra/ws/client.ts:15
+[  348418ms] [ERROR] WebSocket connection to 'ws://localhost:3000/ws' failed: Connection closed before receiving a handshake response @ http://localhost:3000/src/infra/ws/client.ts:15
+[  351428ms] [ERROR] WebSocket connection to 'ws://localhost:3000/ws' failed: Connection closed before receiving a handshake response @ http://localhost:3000/src/infra/ws/client.ts:15
+[  354445ms] [ERROR] WebSocket connection to 'ws://localhost:3000/ws' failed: Connection closed before receiving a handshake response @ http://localhost:3000/src/infra/ws/client.ts:15
+[  357471ms] [ERROR] WebSocket connection to 'ws://localhost:3000/ws' failed: Connection closed before receiving a handshake response @ http://localhost:3000/src/infra/ws/client.ts:15
+[  360508ms] [ERROR] WebSocket connection to 'ws://localhost:3000/ws' failed: Connection closed before receiving a handshake response @ http://localhost:3000/src/infra/ws/client.ts:15
+[  363583ms] [ERROR] WebSocket connection to 'ws://localhost:3000/ws' failed: Connection closed before receiving a handshake response @ http://localhost:3000/src/infra/ws/client.ts:15
+[  366742ms] [ERROR] WebSocket connection to 'ws://localhost:3000/ws' failed: Connection closed before receiving a handshake response @ http://localhost:3000/src/infra/ws/client.ts:15
+[  370247ms] [ERROR] WebSocket connection to 'ws://localhost:3000/ws' failed: Connection closed before receiving a handshake response @ http://localhost:3000/src/infra/ws/client.ts:15
+[  374212ms] [ERROR] WebSocket connection to 'ws://localhost:3000/ws' failed: Connection closed before receiving a handshake response @ http://localhost:3000/src/infra/ws/client.ts:15
+[  379169ms] [ERROR] WebSocket connection to 'ws://localhost:3000/ws' failed: Connection closed before receiving a handshake response @ http://localhost:3000/src/infra/ws/client.ts:15
+[  384706ms] [ERROR] WebSocket connection to 'ws://localhost:3000/ws' failed: Connection closed before receiving a handshake response @ http://localhost:3000/src/infra/ws/client.ts:15
+[  388804ms] [ERROR] WebSocket connection to 'ws://localhost:3000/ws' failed: Connection closed before receiving a handshake response @ http://localhost:3000/src/infra/ws/client.ts:15
+[  394656ms] [ERROR] WebSocket connection to 'ws://localhost:3000/ws' failed: Connection closed before receiving a handshake response @ http://localhost:3000/src/infra/ws/client.ts:15
+[  401829ms] [ERROR] WebSocket connection to 'ws://localhost:3000/ws' failed: Connection closed before receiving a handshake response @ http://localhost:3000/src/infra/ws/client.ts:15
+[  408809ms] [ERROR] WebSocket connection to 'ws://localhost:3000/ws' failed: Connection closed before receiving a handshake response @ http://localhost:3000/src/infra/ws/client.ts:15
+[  414677ms] [ERROR] WebSocket connection to 'ws://localhost:3000/ws' failed: Connection closed before receiving a handshake response @ http://localhost:3000/src/infra/ws/client.ts:15
+[  418882ms] [ERROR] WebSocket connection to 'ws://localhost:3000/ws' failed: Connection closed before receiving a handshake response @ http://localhost:3000/src/infra/ws/client.ts:15
+[  423698ms] [ERROR] WebSocket connection to 'ws://localhost:3000/ws' failed: Connection closed before receiving a handshake response @ http://localhost:3000/src/infra/ws/client.ts:15
+[  431101ms] [ERROR] WebSocket connection to 'ws://localhost:3000/ws' failed: Connection closed before receiving a handshake response @ http://localhost:3000/src/infra/ws/client.ts:15

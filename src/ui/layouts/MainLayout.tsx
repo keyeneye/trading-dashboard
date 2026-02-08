@@ -1,4 +1,6 @@
 import type { ParentProps } from "solid-js";
+import { ErrorBoundary } from "solid-js";
+import { A } from "@solidjs/router";
 import { connected } from "@app/services/trading";
 
 export default function MainLayout(props: ParentProps) {
@@ -11,11 +13,21 @@ export default function MainLayout(props: ParentProps) {
         </span>
       </header>
       <nav class="nav">
-        <a href="/">Portfolio</a>
-        <a href="/trades">Trades</a>
-        <a href="/signals">Signals</a>
+        <A href="/" end>Portfolio</A>
+        <A href="/trades">Trades</A>
+        <A href="/signals">Signals</A>
       </nav>
-      <main class="main">{props.children}</main>
+      <main class="main">
+        <ErrorBoundary fallback={(err, reset) => (
+          <div class="card">
+            <h2>Connection Error</h2>
+            <p>{err.message}</p>
+            <button onClick={reset}>Retry</button>
+          </div>
+        )}>
+          {props.children}
+        </ErrorBoundary>
+      </main>
     </div>
   );
 }

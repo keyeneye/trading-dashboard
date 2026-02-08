@@ -1,0 +1,48 @@
+[      58ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:3000/api/positions:0
+[      59ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:3000/api/trades/today:0
+[      61ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:3000/api/signals/today:0
+[      63ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:3000/api/snapshots?limit=30:0
+[      63ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:3000/api/portfolio:0
+[     307ms] [ERROR] WebSocket connection to 'ws://localhost:3000/ws' failed: Connection closed before receiving a handshake response @ http://localhost:3000/src/infra/ws/client.ts:15
+[    3348ms] [ERROR] WebSocket connection to 'ws://localhost:3000/ws' failed: Connection closed before receiving a handshake response @ http://localhost:3000/src/infra/ws/client.ts:15
+[    6415ms] [ERROR] WebSocket connection to 'ws://localhost:3000/ws' failed: Connection closed before receiving a handshake response @ http://localhost:3000/src/infra/ws/client.ts:15
+[    8137ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:3000/api/trades?limit=50:0
+[    9483ms] [ERROR] WebSocket connection to 'ws://localhost:3000/ws' failed: Connection closed before receiving a handshake response @ http://localhost:3000/src/infra/ws/client.ts:15
+[   12508ms] [ERROR] WebSocket connection to 'ws://localhost:3000/ws' failed: Connection closed before receiving a handshake response @ http://localhost:3000/src/infra/ws/client.ts:15
+[   15555ms] [ERROR] WebSocket connection to 'ws://localhost:3000/ws' failed: Connection closed before receiving a handshake response @ http://localhost:3000/src/infra/ws/client.ts:15
+[   18576ms] [ERROR] WebSocket connection to 'ws://localhost:3000/ws' failed: Connection closed before receiving a handshake response @ http://localhost:3000/src/infra/ws/client.ts:15
+[   21681ms] [ERROR] WebSocket connection to 'ws://localhost:3000/ws' failed: Connection closed before receiving a handshake response @ http://localhost:3000/src/infra/ws/client.ts:15
+[   24746ms] [ERROR] WebSocket connection to 'ws://localhost:3000/ws' failed: Connection closed before receiving a handshake response @ http://localhost:3000/src/infra/ws/client.ts:15
+[   27852ms] [ERROR] WebSocket connection to 'ws://localhost:3000/ws' failed: Connection closed before receiving a handshake response @ http://localhost:3000/src/infra/ws/client.ts:15
+[   30917ms] [ERROR] WebSocket connection to 'ws://localhost:3000/ws' failed: Connection closed before receiving a handshake response @ http://localhost:3000/src/infra/ws/client.ts:15
+[   34028ms] [ERROR] WebSocket connection to 'ws://localhost:3000/ws' failed: Connection closed before receiving a handshake response @ http://localhost:3000/src/infra/ws/client.ts:15
+[   37264ms] [ERROR] WebSocket connection to 'ws://localhost:3000/ws' failed: Connection closed before receiving a handshake response @ http://localhost:3000/src/infra/ws/client.ts:15
+[   40505ms] [ERROR] WebSocket connection to 'ws://localhost:3000/ws' failed: Connection closed before receiving a handshake response @ http://localhost:3000/src/infra/ws/client.ts:15
+[   43733ms] [ERROR] WebSocket connection to 'ws://localhost:3000/ws' failed: Connection closed before receiving a handshake response @ http://localhost:3000/src/infra/ws/client.ts:15
+[   46806ms] [ERROR] WebSocket connection to 'ws://localhost:3000/ws' failed: Connection closed before receiving a handshake response @ http://localhost:3000/src/infra/ws/client.ts:15
+[   49999ms] [ERROR] WebSocket connection to 'ws://localhost:3000/ws' failed: Connection closed before receiving a handshake response @ http://localhost:3000/src/infra/ws/client.ts:15
+[   53336ms] [ERROR] WebSocket connection to 'ws://localhost:3000/ws' failed: Connection closed before receiving a handshake response @ http://localhost:3000/src/infra/ws/client.ts:15
+[   56845ms] [ERROR] WebSocket connection to 'ws://localhost:3000/ws' failed: Connection closed before receiving a handshake response @ http://localhost:3000/src/infra/ws/client.ts:15
+[   60117ms] [ERROR] WebSocket connection to 'ws://localhost:3000/ws' failed: Connection closed before receiving a handshake response @ http://localhost:3000/src/infra/ws/client.ts:15
+[   62594ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:3000/api/positions:0
+[   62594ms] [ERROR] Error: API 500: /api/positions
+    at get (http://localhost:3000/src/infra/api/client.ts:4:22)
+    at async safeFetch (http://localhost:3000/src/app/services/trading.ts?t=1770525822802:14:12) @ http://localhost:3000/src/app/services/trading.ts?t=1770525822802:15
+[   62595ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:3000/api/trades/today:0
+[   62595ms] [ERROR] Error: API 500: /api/trades/today
+    at get (http://localhost:3000/src/infra/api/client.ts:4:22)
+    at async safeFetch (http://localhost:3000/src/app/services/trading.ts?t=1770525822802:14:12) @ http://localhost:3000/src/app/services/trading.ts?t=1770525822802:15
+[   62595ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:3000/api/signals/today:0
+[   62595ms] [ERROR] Error: API 500: /api/signals/today
+    at get (http://localhost:3000/src/infra/api/client.ts:4:22)
+    at async safeFetch (http://localhost:3000/src/app/services/trading.ts?t=1770525822802:14:12) @ http://localhost:3000/src/app/services/trading.ts?t=1770525822802:15
+[   62595ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:3000/api/snapshots?limit=30:0
+[   62595ms] [ERROR] Error: API 500: /api/snapshots?limit=30
+    at get (http://localhost:3000/src/infra/api/client.ts:4:22)
+    at async safeFetch (http://localhost:3000/src/app/services/trading.ts?t=1770525822802:14:12) @ http://localhost:3000/src/app/services/trading.ts?t=1770525822802:15
+[   62595ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:3000/api/portfolio:0
+[   62595ms] [ERROR] Error: API 500: /api/portfolio
+    at get (http://localhost:3000/src/infra/api/client.ts:4:22)
+    at async safeFetch (http://localhost:3000/src/app/services/trading.ts?t=1770525822802:14:12) @ http://localhost:3000/src/app/services/trading.ts?t=1770525822802:15
+[   63074ms] [ERROR] WebSocket connection to 'ws://localhost:3000/ws' failed: Connection closed before receiving a handshake response @ http://localhost:3000/src/infra/ws/client.ts:15
+[   63740ms] [ERROR] WebSocket connection to 'ws://localhost:3000/ws' failed: Connection closed before receiving a handshake response @ http://localhost:3000/src/infra/ws/client.ts:15

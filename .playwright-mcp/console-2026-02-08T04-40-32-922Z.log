@@ -1,0 +1,19 @@
+[      62ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:3000/api/positions:0
+[      63ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:3000/api/trades/today:0
+[      63ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:3000/api/signals/today:0
+[      63ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:3000/api/snapshots?limit=30:0
+[      63ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:3000/api/portfolio:0
+[      64ms] [ERROR] WebSocket connection to 'ws://localhost:3000/ws' failed: Connection closed before receiving a handshake response @ http://localhost:3000/src/infra/ws/client.ts:15
+[      75ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://localhost:3000/favicon.ico:0
+[    3067ms] [ERROR] WebSocket connection to 'ws://localhost:3000/ws' failed: Connection closed before receiving a handshake response @ http://localhost:3000/src/infra/ws/client.ts:15
+[    3544ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:3000/api/trades?limit=50:0
+[    3548ms] Error: API 500: /api/trades?limit=50
+    at get (http://localhost:3000/src/infra/api/client.ts:4:22)
+[    6069ms] [ERROR] WebSocket connection to 'ws://localhost:3000/ws' failed: Connection closed before receiving a handshake response @ http://localhost:3000/src/infra/ws/client.ts:15
+[    9071ms] [ERROR] WebSocket connection to 'ws://localhost:3000/ws' failed: Connection closed before receiving a handshake response @ http://localhost:3000/src/infra/ws/client.ts:15
+[   12074ms] [ERROR] WebSocket connection to 'ws://localhost:3000/ws' failed: Connection closed before receiving a handshake response @ http://localhost:3000/src/infra/ws/client.ts:15
+[   15076ms] [ERROR] WebSocket connection to 'ws://localhost:3000/ws' failed: Connection closed before receiving a handshake response @ http://localhost:3000/src/infra/ws/client.ts:15
+[   18079ms] [ERROR] WebSocket connection to 'ws://localhost:3000/ws' failed: Connection closed before receiving a handshake response @ http://localhost:3000/src/infra/ws/client.ts:15
+[   21082ms] [ERROR] WebSocket connection to 'ws://localhost:3000/ws' failed: Connection closed before receiving a handshake response @ http://localhost:3000/src/infra/ws/client.ts:15
+[   21602ms] Error: API 500: /api/portfolio
+    at get (http://localhost:3000/src/infra/api/client.ts:4:22)

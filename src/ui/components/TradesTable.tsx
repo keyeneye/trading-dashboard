@@ -1,8 +1,41 @@
 import { For, Show, createResource } from "solid-js";
 import { api } from "@app/services/trading";
 
+interface Trade {
+  id: number;
+  timestamp: string;
+  symbol: string;
+  side: "buy" | "sell" | "short" | "cover";
+  quantity: number;
+  price: number;
+  total_value: number;
+  strategy: string;
+  order_id: string;
+  notes: string;
+}
+
+function getSideClass(side: string): string {
+  switch (side) {
+    case "buy":
+    case "cover":
+      return "positive";
+    case "sell":
+    case "short":
+      return "negative";
+    default:
+      return "";
+  }
+}
+
+function getSideLabel(side: string): string {
+  return side.toUpperCase();
+}
+
 export default function TradesTable() {
-  const [trades] = createResource(() => api.getTrades(undefined, 50));
+  const [trades] = createResource(async () => {
+    try { return await api.getTrades(undefined, 50); }
+    catch (e) { console.error(e); return undefined; }
+  });
 
   return (
     <div class="card">
@@ -22,11 +55,15 @@ export default function TradesTable() {
             </thead>
             <tbody>
               <For each={list()}>
-                {(t) => (
+                {(t: Trade) => (
                   <tr>
                     <td>{new Date(t.timestamp).toLocaleString()}</td>
                     <td class="symbol">{t.symbol}</td>
-                    <td class={t.side === "buy" ? "positive" : "negative"}>{t.side.toUpperCase()}</td>
+                    <td class={getSideClass(t.side)}>
+                      <span class={`badge ${getSideClass(t.side)}`}>
+                        {getSideLabel(t.side)}
+                      </span>
+                    </td>
                     <td>{t.quantity}</td>
                     <td>${t.price.toFixed(2)}</td>
                     <td>{t.strategy}</td>

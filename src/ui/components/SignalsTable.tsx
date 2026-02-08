@@ -2,7 +2,10 @@ import { For, Show, createResource } from "solid-js";
 import { api } from "@app/services/trading";
 
 export default function SignalsTable() {
-  const [signals] = createResource(() => api.getSignals(undefined, 100));
+  const [signals] = createResource(async () => {
+    try { return await api.getSignals(undefined, 100); }
+    catch (e) { console.error(e); return undefined; }
+  });
 
   return (
     <div class="card">

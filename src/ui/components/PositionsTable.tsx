@@ -1,5 +1,6 @@
 import { For, Show } from "solid-js";
 import { positions, latestPrices } from "@app/services/trading";
+import { isShortPosition, calculatePositionPnL } from "@core/entities/position";
 
 export default function PositionsTable() {
   return (
@@ -11,6 +12,7 @@ export default function PositionsTable() {
             <thead>
               <tr>
                 <th>Symbol</th>
+                <th>Type</th>
                 <th>Qty</th>
                 <th>Entry</th>
                 <th>Current</th>
@@ -21,14 +23,26 @@ export default function PositionsTable() {
               <For each={pos()}>
                 {(p) => {
                   const live = () => latestPrices[p.symbol] ?? p.current_price;
-                  const pnl = () => (live() - p.avg_entry_price) * p.quantity;
+                  const pnl = () => calculatePositionPnL(p);
+                  const short = () => isShortPosition(p);
+                  const pnlClass = () => {
+                    if (short()) {
+                      return pnl() >= 0 ? "positive" : "negative";
+                    }
+                    return pnl() >= 0 ? "positive" : "negative";
+                  };
                   return (
                     <tr>
                       <td class="symbol">{p.symbol}</td>
+                      <td>
+                        <span class={`badge ${short() ? "badge-short" : "badge-long"}`}>
+                          {short() ? "SHORT" : "LONG"}
+                        </span>
+                      </td>
                       <td>{p.quantity}</td>
                       <td>${p.avg_entry_price.toFixed(2)}</td>
                       <td>${live().toFixed(2)}</td>
-                      <td class={pnl() >= 0 ? "positive" : "negative"}>
+                      <td class={pnlClass()}>
                         {pnl() >= 0 ? "+" : ""}${pnl().toFixed(2)}
                       </td>
                     </tr>

@@ -1,5 +1,9 @@
 import TradesTable from "@ui/components/TradesTable";
 
 export default function TradesPage() {
-  return <TradesTable />;
+  return (
+    <div class="dashboard">
+      <TradesTable />
+    </div>
+  );
 }

@@ -17,12 +17,20 @@ const [latestPrices, setLatestPrices] = createStore<Record<string, number>>({});
 const [latestSnapshot, setLatestSnapshot] = createSignal<PortfolioSnapshot | null>(null);
 
 // --- Resources (auto-fetching) ---
+// Fetchers catch errors to prevent them from propagating into
+// the router's Suspense transitions (which would abort navigation).
+// Components already handle undefined via <Show> fallbacks.
 
-const [positions, { refetch: refetchPositions }] = createResource(() => api.getPositions());
-const [tradesToday, { refetch: refetchTrades }] = createResource(() => api.getTradesToday());
-const [signalsToday, { refetch: refetchSignals }] = createResource(() => api.getSignalsToday());
-const [snapshots, { refetch: refetchSnapshots }] = createResource(() => api.getSnapshots(30));
-const [portfolio, { refetch: refetchPortfolio }] = createResource(() => api.getPortfolio());
+async function safeFetch<T>(fn: () => Promise<T>): Promise<T | undefined> {
+  try { return await fn(); }
+  catch (e) { console.error(e); return undefined; }
+}
+
+const [positions, { refetch: refetchPositions }] = createResource(() => safeFetch(() => api.getPositions()));
+const [tradesToday, { refetch: refetchTrades }] = createResource(() => safeFetch(() => api.getTradesToday()));
+const [signalsToday, { refetch: refetchSignals }] = createResource(() => safeFetch(() => api.getSignalsToday()));
+const [snapshots, { refetch: refetchSnapshots }] = createResource(() => safeFetch(() => api.getSnapshots(30)));
+const [portfolio, { refetch: refetchPortfolio }] = createResource(() => safeFetch(() => api.getPortfolio()));
 
 // --- WebSocket event handling ---
 
