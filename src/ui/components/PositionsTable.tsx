@@ -11,8 +11,9 @@ export default function PositionsTable() {
       </div>
       <Show when={positions()} fallback={<p>Loading...</p>}>
         {(pos) => {
-          const totalPnl = () => pos().reduce((sum, p) => sum + calculatePositionPnL(p), 0);
-          const totalValue = () => pos().reduce((sum, p) => sum + (p.quantity * (latestPrices[p.symbol] ?? p.current_price)), 0);
+          const livePrice = (p: { symbol: string; current_price: number }) => latestPrices[p.symbol] ?? p.current_price;
+          const totalPnl = () => pos().reduce((sum, p) => sum + (livePrice(p) - p.avg_entry_price) * p.quantity, 0);
+          const totalValue = () => pos().reduce((sum, p) => sum + (p.quantity * livePrice(p)), 0);
 
           return (
             <>
@@ -32,7 +33,7 @@ export default function PositionsTable() {
                     <For each={pos()}>
                       {(p) => {
                         const live = () => latestPrices[p.symbol] ?? p.current_price;
-                        const pnl = () => calculatePositionPnL(p);
+                        const pnl = () => (live() - p.avg_entry_price) * p.quantity;
                         const short = () => isShortPosition(p);
                         const pnlPercent = () => ((live() - p.avg_entry_price) / p.avg_entry_price) * 100;
                         return (

@@ -53,6 +53,7 @@ function handleWsEvent(event: WsEvent) {
       setLatestSnapshot(event.data as unknown as PortfolioSnapshot);
       refetchSnapshots();
       refetchPortfolio();
+      refetchPositions();
       break;
   }
 }
