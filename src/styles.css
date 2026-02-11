@@ -2081,6 +2081,67 @@ tbody td.pnl {
 }
 
 /* =========================================
+   PAGINATION
+   ========================================= */
+
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1rem;
+  border-top: 1px solid var(--border);
+}
+
+.pagination-btn {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--border);
+  color: var(--text-dim);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  padding: 0.35rem 0.6rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  line-height: 1;
+}
+
+.pagination-btn:hover:not(:disabled) {
+  background: rgba(0,229,255,0.08);
+  border-color: rgba(0,229,255,0.3);
+  color: var(--cyan);
+}
+
+.pagination-btn:disabled {
+  opacity: 0.25;
+  cursor: default;
+}
+
+.pagination-info {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--text-muted);
+  padding: 0 0.5rem;
+  letter-spacing: 0.03em;
+}
+
+@media (max-width: 768px) {
+  .pagination {
+    gap: 0.35rem;
+    padding: 0.6rem 0.75rem;
+  }
+
+  .pagination-btn {
+    padding: 0.3rem 0.5rem;
+    font-size: 0.7rem;
+  }
+
+  .pagination-info {
+    font-size: 0.6rem;
+  }
+}
+
+/* =========================================
    PAGE TRANSITIONS
    ========================================= */
 
