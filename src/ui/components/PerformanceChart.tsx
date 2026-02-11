@@ -1,6 +1,29 @@
-import { onMount, onCleanup, createEffect, createSignal, Show } from "solid-js";
-import { snapshots, tradesToday, signalsToday } from "@app/services/trading";
+import { onMount, onCleanup, createEffect, createSignal, createMemo, createResource, Show, For } from "solid-js";
+import { tradesToday, signalsToday, portfolio, latestSnapshot, positions, latestPrices, api } from "@app/services/trading";
 import type { PortfolioSnapshot } from "@core/entities";
+
+type Period = "1D" | "1M" | "1Y" | "ALL";
+const PERIODS: Period[] = ["1D", "1M", "1Y", "ALL"];
+
+const PERIOD_CONFIG: Record<Period, { limit: number; daysBack: number | null }> = {
+  "1D":  { limit: 50,    daysBack: 0 },
+  "1M":  { limit: 100,   daysBack: 30 },
+  "1Y":  { limit: 2000,  daysBack: 365 },
+  "ALL": { limit: 10000, daysBack: null },
+};
+
+function filterByPeriod(data: PortfolioSnapshot[], period: Period): PortfolioSnapshot[] {
+  const { daysBack } = PERIOD_CONFIG[period];
+  if (daysBack === null) return data;
+  if (daysBack === 0) {
+    const today = new Date().toISOString().slice(0, 10);
+    return data.filter((s) => s.timestamp.slice(0, 10) === today);
+  }
+  const cutoff = new Date();
+  cutoff.setDate(cutoff.getDate() - daysBack);
+  const cutoffStr = cutoff.toISOString();
+  return data.filter((s) => s.timestamp >= cutoffStr);
+}
 
 interface FibLevel {
   ratio: number;
@@ -408,9 +431,131 @@ export default function PerformanceChart() {
   let containerRef: HTMLDivElement | undefined;
   let resizeObserver: ResizeObserver | undefined;
   const [mouseX, setMouseX] = createSignal<number | null>(null);
+  const [period, setPeriod] = createSignal<Period>("1M");
+
+  // Fetch snapshots based on selected period
+  const [periodSnapshots, { refetch: refetchPeriod }] = createResource(period, async (p) => {
+    const { limit } = PERIOD_CONFIG[p];
+    const data = await api.getSnapshots(limit);
+    return filterByPeriod(data, p);
+  });
+
+  // Accumulate live portfolio samples for intraday resolution.
+  // Captures a data point every 2 minutes while the page is open.
+  const [intradaySamples, setIntradaySamples] = createSignal<PortfolioSnapshot[]>([]);
+  const SAMPLE_INTERVAL = 2 * 60 * 1000; // 2 minutes
+
+  // Build a live snapshot for today from current positions + prices.
+  // The API snapshots may only go up to yesterday if no new snapshot
+  // has been persisted yet.
+  const liveSnapshot = createMemo((): PortfolioSnapshot | null => {
+    const p = portfolio();
+    if (!p?.snapshot) return null;
+
+    const pos = positions();
+    if (!pos || pos.length === 0) return null;
+
+    const prices = latestPrices;
+    const positionsValue = pos.reduce((sum, p) => {
+      const price = prices[p.symbol] ?? p.current_price;
+      return sum + p.quantity * price;
+    }, 0);
+    const totalValue = p.snapshot.cash + positionsValue;
+    const dailyPnl = pos.reduce((sum, p) => {
+      const price = prices[p.symbol] ?? p.current_price;
+      return sum + (price - p.avg_entry_price) * p.quantity;
+    }, 0);
+
+    return {
+      id: 0,
+      timestamp: new Date().toISOString(),
+      total_value: totalValue,
+      cash: p.snapshot.cash,
+      positions_value: positionsValue,
+      daily_pnl: dailyPnl,
+      total_pnl: p.snapshot.total_pnl,
+    };
+  });
+
+  // Sample live portfolio periodically for intraday chart
+  const sampleInterval = setInterval(() => {
+    const snap = liveSnapshot();
+    if (snap) {
+      setIntradaySamples((prev) => [...prev, { ...snap, timestamp: new Date().toISOString() }]);
+    }
+  }, SAMPLE_INTERVAL);
+  onCleanup(() => clearInterval(sampleInterval));
+
+  // Refetch API snapshots when a new backend snapshot arrives via WS
+  createEffect(() => {
+    latestSnapshot();
+    refetchPeriod();
+  });
+
+  // Merge API snapshots with live samples and current value.
+  const mergedSnapshots = createMemo(() => {
+    const apiData = periodSnapshots();
+    const live = latestSnapshot() ?? liveSnapshot();
+
+    if (period() === "1D") {
+      // Combine: API snapshots for today + frontend samples + live value
+      const today = new Date().toISOString().slice(0, 10);
+      const apiToday = (apiData ?? []).filter((s) => s.timestamp.slice(0, 10) === today);
+      const samples = intradaySamples();
+      const all = [...apiToday, ...samples];
+      if (live) all.push(live);
+      // Sort chronologically and deduplicate by ~1 min proximity
+      all.sort((a, b) => a.timestamp.localeCompare(b.timestamp));
+      const deduped: PortfolioSnapshot[] = [];
+      for (const s of all) {
+        const last = deduped[deduped.length - 1];
+        if (!last || Math.abs(new Date(s.timestamp).getTime() - new Date(last.timestamp).getTime()) > 60_000) {
+          deduped.push(s);
+        }
+      }
+      return deduped.length > 0 ? deduped : apiData;
+    }
+
+    if (!apiData || apiData.length === 0) {
+      return live ? [live] : apiData;
+    }
+
+    if (!live) return apiData;
+
+    const liveDate = live.timestamp.slice(0, 10);
+    const newestDate = apiData[0].timestamp.slice(0, 10);
+
+    if (liveDate === newestDate) {
+      return [live, ...apiData.slice(1)];
+    } else if (liveDate > newestDate) {
+      return [live, ...apiData];
+    }
+    return apiData;
+  });
+
+  const currentValue = createMemo(() => {
+    const p = portfolio();
+    if (p?.snapshot) return p.snapshot.total_value;
+    const s = mergedSnapshots();
+    if (s && s.length > 0) return s[0].total_value;
+    return null;
+  });
+
+  const totalReturn = createMemo(() => {
+    const s = mergedSnapshots();
+    if (!s || s.length < 2) return null;
+    const sorted = [...s].reverse();
+    const first = sorted[0].total_value;
+    const last = sorted[sorted.length - 1].total_value;
+    return ((last - first) / first) * 100;
+  });
+
+  const tradeCount = createMemo(() => tradesToday()?.length ?? 0);
+
+  const snapshotPeriod = createMemo(() => mergedSnapshots()?.length ?? 0);
 
   function redraw() {
-    const data = snapshots();
+    const data = mergedSnapshots();
     if (data && data.length >= 2 && canvasRef) {
       drawFibonacciChart(canvasRef, data, tradesToday(), signalsToday(), mouseX());
     }
@@ -426,7 +571,7 @@ export default function PerformanceChart() {
   onCleanup(() => resizeObserver?.disconnect());
 
   createEffect(() => {
-    snapshots();
+    mergedSnapshots();
     tradesToday();
     signalsToday();
     mouseX();
@@ -447,9 +592,25 @@ export default function PerformanceChart() {
     <div class="card fib-chart-container performance-card" ref={containerRef!}>
       <div class="performance-header">
         <h2>Performance Overview</h2>
+        <div class="time-range-controls">
+          <For each={PERIODS}>
+            {(p) => (
+              <button
+                class={`time-range-btn${period() === p ? " active" : ""}`}
+                onClick={() => setPeriod(p)}
+              >
+                {p}
+              </button>
+            )}
+          </For>
+        </div>
         <div class="performance-current">
           <span class="current-label">Current</span>
-          <span class="current-value">$100,125</span>
+          <span class="current-value">
+            {currentValue() !== null
+              ? `$${currentValue()!.toLocaleString(undefined, { maximumFractionDigits: 0 })}`
+              : "—"}
+          </span>
         </div>
       </div>
 
@@ -474,7 +635,7 @@ export default function PerformanceChart() {
 
         <div class="chart-wrapper" style="min-height: 320px;">
           <Show
-            when={snapshots() && snapshots()!.length >= 2}
+            when={mergedSnapshots() && mergedSnapshots()!.length >= 2}
             fallback={
               <div class="fib-chart-empty">
                 <div class="fib-chart-empty-icon">&#8967;</div>
@@ -496,22 +657,21 @@ export default function PerformanceChart() {
       <div class="performance-footer">
         <div class="footer-stat">
           <span class="footer-label">Period</span>
-          <span class="footer-value">30 Days</span>
+          <span class="footer-value">{snapshotPeriod()} Days</span>
         </div>
         <div class="footer-divider" />
         <div class="footer-stat">
           <span class="footer-label">Total Return</span>
-          <span class="footer-value positive">+38.2%</span>
+          <span class={`footer-value ${totalReturn() !== null && totalReturn()! >= 0 ? "positive" : "negative"}`}>
+            {totalReturn() !== null
+              ? `${totalReturn()! >= 0 ? "+" : ""}${totalReturn()!.toFixed(2)}%`
+              : "—"}
+          </span>
         </div>
         <div class="footer-divider" />
         <div class="footer-stat">
-          <span class="footer-label">Trades</span>
-          <span class="footer-value">24</span>
-        </div>
-        <div class="footer-divider" />
-        <div class="footer-stat">
-          <span class="footer-label">Win Rate</span>
-          <span class="footer-value">67%</span>
+          <span class="footer-label">Trades Today</span>
+          <span class="footer-value">{tradeCount()}</span>
         </div>
       </div>
     </div>

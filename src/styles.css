@@ -486,6 +486,40 @@ body::before {
   opacity: 0.7;
 }
 
+.time-range-controls {
+  display: flex;
+  gap: 0.25rem;
+  align-items: center;
+}
+
+.time-range-btn {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  padding: 0.3rem 0.65rem;
+  border-radius: 4px;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--text-dim);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-transform: uppercase;
+}
+
+.time-range-btn:hover {
+  color: var(--text);
+  border-color: var(--border-active);
+  background: rgba(255,255,255,0.03);
+}
+
+.time-range-btn.active {
+  color: var(--cyan);
+  border-color: rgba(0,229,255,0.4);
+  background: rgba(0,229,255,0.08);
+  text-shadow: 0 0 12px rgba(0,229,255,0.3);
+}
+
 .performance-current {
   text-align: right;
 }
@@ -1769,6 +1803,11 @@ tbody td.pnl {
     flex-direction: column;
     gap: 0.75rem;
     margin-bottom: 1rem;
+  }
+
+  .performance-header .time-range-controls {
+    order: -1;
+    align-self: flex-start;
   }
 
   .performance-current {

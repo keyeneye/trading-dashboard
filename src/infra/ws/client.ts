@@ -3,6 +3,7 @@ import type { IWebSocketPort, WsEvent, WsEventHandler } from "@core/ports";
 export class WebSocketClient implements IWebSocketPort {
   private ws: WebSocket | null = null;
   private handlers: WsEventHandler[] = [];
+  private connectHandlers: (() => void)[] = [];
   private url: string;
   private reconnectMs = 3000;
   private shouldReconnect = true;
@@ -22,6 +23,7 @@ export class WebSocketClient implements IWebSocketPort {
 
     this.ws.onopen = () => {
       console.log("[WS] connected");
+      for (const h of this.connectHandlers) h();
     };
 
     this.ws.onmessage = (msg) => {
@@ -53,6 +55,10 @@ export class WebSocketClient implements IWebSocketPort {
 
   onEvent(handler: WsEventHandler): void {
     this.handlers.push(handler);
+  }
+
+  onConnect(handler: () => void): void {
+    this.connectHandlers.push(handler);
   }
 
   isConnected(): boolean {

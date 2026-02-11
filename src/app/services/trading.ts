@@ -62,6 +62,13 @@ function handleWsEvent(event: WsEvent) {
 
 export function initTrading() {
   ws.onEvent(handleWsEvent);
+  ws.onConnect(() => {
+    refetchPositions();
+    refetchTrades();
+    refetchSignals();
+    refetchSnapshots();
+    refetchPortfolio();
+  });
   ws.connect();
 
   // Track connection state
